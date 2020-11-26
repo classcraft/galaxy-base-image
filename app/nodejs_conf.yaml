@@ -2,4 +2,4 @@ logs:
   - type: file
     path: "/app/logs/current"
     service: "SERVICE_NAME"
-    source: "meteorjs"
+    source: "nodejs"

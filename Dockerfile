@@ -15,8 +15,8 @@ RUN apt-get update && \
 
 ADD ./app /app
 RUN mkdir -p /app/bundle && \
-    mkdir /etc/datadog-agent/conf.d/meteorjs.d && \
-    mv /app/meteorjs_conf.yaml /etc/datadog-agent/conf.d/meteorjs.d/conf.yaml
+    mkdir /etc/datadog-agent/conf.d/nodejs.d && \
+    mv /app/nodejs_conf.yaml /etc/datadog-agent/conf.d/nodejs.d/conf.yaml
 
 # Include some popular versions of Node (last updated 2018-Jun-26; see
 # docs/galaxy/base_image.md in the internal services repo for details on how to
