@@ -27,5 +27,5 @@ else
   # if you want to use one of Node's whitelisted options, but
   # GALAXY_NODE_OPTIONS will work for all Node options.
   # shellcheck disable=SC2086
-  exec node ${GALAXY_NODE_OPTIONS:-} ${NODE_OPTIONS:-} main.js
+  exec node ${GALAXY_NODE_OPTIONS:-} ${NODE_OPTIONS:-} main.js 2>&1 | tee >(multilog s1000000 n10 /app/logs)
 fi

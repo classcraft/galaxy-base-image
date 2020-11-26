@@ -3,19 +3,20 @@ FROM meteor/ubuntu:20160830T182201Z_0f378f5
 # Make sure we have xz-utils so we can untar node binary, and jq to parse
 # star.json to choose the npm version.
 RUN apt-get update && \
-    apt-get install -y jq xz-utils apt-transport-https && \
+    apt-get install -y jq xz-utils apt-transport-https daemontools && \
     sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list" && \
     apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE && \
     apt-get update && \
     apt-get install datadog-agent && \
     sh -c "sed 's/# site:.*/site: datadoghq.com/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml" && \
     sh -c "sed -i 's/# logs_enabled:.*/logs_enabled: true/' /etc/datadog-agent/datadog.yaml" && \
+    sh -c "sed -i 's/# log_level:.*/log_level: ERROR/' /etc/datadog-agent/datadog.yaml" && \
     rm -rf /var/lib/apt/lists/*
 
 ADD ./app /app
 RUN mkdir -p /app/bundle && \
-    mkdir /etc/datadog-agent/conf.d/journald.d && \
-    mv /app/journald_conf.yaml /etc/datadog-agent/conf.d/journald.d/conf.yaml
+    mkdir /etc/datadog-agent/conf.d/meteorjs.d && \
+    mv /app/meteorjs_conf.yaml /etc/datadog-agent/conf.d/meteorjs.d/conf.yaml
 
 # Include some popular versions of Node (last updated 2018-Jun-26; see
 # docs/galaxy/base_image.md in the internal services repo for details on how to
