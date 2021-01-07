@@ -3,3 +3,7 @@ logs:
     path: "/app/logs/current"
     service: "SERVICE_NAME"
     source: "nodejs"
+    log_processing_rules:
+        - type: multi_line
+          name: new_log_not_start_with_at
+          pattern: "[^\\s]"

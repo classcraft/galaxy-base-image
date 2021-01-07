@@ -9,7 +9,7 @@ else
     sudo sh -c "sed -i 's|SERVICE_NAME|$ROOT_URL|' /etc/datadog-agent/conf.d/nodejs.d/conf.yaml"
     mkdir /app/logs
     touch /app/logs/current
-    datadog-agent start &
+    datadog-agent run &
 
     echo "Datadog agent started"
 fi
