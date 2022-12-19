@@ -13,7 +13,7 @@ RUN apt-get update && \
 RUN sh -c "sed 's/# site:.*/site: datadoghq.com/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml" && \
     sh -c "sed -i 's/# logs_enabled:.*/logs_enabled: true/' /etc/datadog-agent/datadog.yaml" && \
     sh -c "sed -i 's/# log_level:.*/log_level: ERROR/' /etc/datadog-agent/datadog.yaml" && \
-    echo "enable_payload: \n  series: false \n  events: false \n  service_checks: false \n  sketches: false \n" >> /etc/datadog-agent/datadog.yaml
+    echo "enable_payloads: \n  series: false \n  events: false \n  service_checks: false \n  sketches: false \n" >> /etc/datadog-agent/datadog.yaml
 
 ADD ./app /app
 RUN mkdir -p /app/bundle && \
